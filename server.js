@@ -6,10 +6,11 @@ var methodOverride = require('method-override');
 var app = express();
 
 //PORT////////////////////////////////////////////////
-var port = 3000;
+var port = process.env.PORT || 3000;
+var mongoDBURI = process.env.MONGO_URI || 'mongodb://localhost:27017/project2'
 
 //DATABASE////////////////////////////////////////////
-mongoose.connect('mongodb://localhost/project2');
+mongoose.connect(mongoDBURI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function(){
