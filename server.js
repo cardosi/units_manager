@@ -7,7 +7,7 @@ var app = express();
 
 //PORT////////////////////////////////////////////////
 var port = process.env.PORT || 3000;
-var mongoDBURI = process.env.MONGO_URI || 'mongodb://localhost:27017/project2'
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/project2'
 
 //DATABASE////////////////////////////////////////////
 mongoose.connect(mongoDBURI);
