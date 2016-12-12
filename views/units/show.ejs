@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show UNIT</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/units'>UNITS Dashboard</a></li>
+      </ul>
+    </nav>
+    <h1>Container #<%=unit.contNum%></h1>
+    <h3>Brand: <%=unit.brand%></h3>
+    <ul>
+      <li><a href='/units/<%=unit._id%>/edit'>Edit This Container</a></li>
+      <li>
+        <form action='/units/<%=unit._id%>?_method=DELETE' method='POST'>
+          <input type='submit' value='Remove This Container'/>
+        </form>
+      </li>
+    </ul>
+
+  </body>
+</html>

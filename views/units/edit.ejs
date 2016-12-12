@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit UNIT</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/units'>Units</a></li>
+      </ul>
+    </nav>
+    <h1>Change UNIT Info</h1>
+    <main>
+      <form action="/units/<%=unit._id%>?_method=PUT" method="POST">
+        <input type="text" name="contNum" value='<%=unit.contNum%>'/><br/>
+        <input type="text" name="brand" value="<%=unit.brand%>"/><br/>
+        <input type="submit" value="Update Container"/>
+      </form>
+    </main>
+  </body>
+</html>

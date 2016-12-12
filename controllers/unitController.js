@@ -29,16 +29,31 @@ router.post('/', function(req, res){
   });
 });
 
+//EDIT ROUTE/////////////////////////////////////////////
+router.get('/:id/edit', function(req, res){
+  Unit.findById(req.params.id, function(err, foundUnit){
+    res.render('units/edit.ejs', {
+      unit: foundUnit
+    });
+  });
+});
 
+//UPDATE ROUTE////////////////////////////////////////////
+router.put('/:id', function(req, res){
+  console.log('update route accessed');
+  Unit.findByIdAndUpdate(req.params.id, req.body, function(err, updatedUnit){
+    res.redirect('/units/'+req.params.id);
+  });
+});
 
-
-
-
-
-
-
-
-
+//SHOW ROUTE//////////////////////////////////////////////
+router.get('/:id', function(req, res){
+  Unit.findById(req.params.id, function(err, foundUnit){
+    res.render('units/show.ejs', {
+      unit: foundUnit
+    });
+  });
+});
 
 
 module.exports = router;
