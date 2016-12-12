@@ -21,9 +21,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
+//CONTROLLERS/////////////////////////////////////////
+var unitsController = require('./controllers/unitController');
+app.use('/units', unitsController);
+
 //ROOT ROUTE//////////////////////////////////////////
 app.get('/', function(req, res){
-  res.send('UNITS APP');
+  res.render('index.ejs');
 });
 
 //LISTENER/////////////////////////////////////////////

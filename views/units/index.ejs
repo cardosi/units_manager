@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UNITS DashBoard</title>
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+      </ul>
+    </nav>
+    <h1>UNITS DashBoard</h1>
+    <h2>Containers</h2>
+    <section>
+      <ul>
+        <li><a href='/units/new/'>Add Container</a></li>
+      </ul>
+    </section>
+    <h3>All Containers</h3>
+    <ul>
+      <% for(var i = 0; i < allUnits.length; i++){%>
+        <li>
+          <a href=''><%=allUnits[i].contNum%></a>
+        </li>
+      <%}%>
+    </ul>
+
+  </body>
+</html>
