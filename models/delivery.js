@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var deliverySchema = new Schema({
-  scheduled: Date,
+  scheduled: String,
   status: String,
   type: String,
-  customer: [],
-  container: [],
+  customer: String,
+  container: String,
   start_location: String,
   end_location: String,
   distance: String,

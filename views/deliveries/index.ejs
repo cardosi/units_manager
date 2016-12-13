@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Deliveries DashBoard</title>
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+      </ul>
+    </nav>
+    <h1>Deliveries DashBoard</h1>
+    <h2>Deliveries</h2>
+    <section>
+      <ul>
+        <li><a href='/deliveries/new/'>Add Delivery</a></li>
+      </ul>
+    </section>
+    <h3>All Deliveries</h3>
+    <ul>
+      <% for(var i = 0; i < allDeliveries.length; i++){%>
+        <li>
+          <a href='/deliveries/<%=allDeliveries[i]._id%>'><%=allDeliveries[i].scheduled%></a>
+        </li>
+      <%}%>
+    </ul>
+
+  </body>
+</html>

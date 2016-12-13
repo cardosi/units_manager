@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Delivery</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/deliveries'>Deliveries</a></li>
+      </ul>
+    </nav>
+    <h1>Change Delivery Info</h1>
+    <main>
+      <form action="/deliveries/<%=delivery._id%>?_method=PUT" method="POST">
+        <input type="text" name="scheduled" value='<%=delivery.scheduled%>'/><br/>
+        <input type="text" name="customer" value="<%=delivery.customer%>"/><br/>
+        <input type="submit" value="Update Delivery"/>
+      </form>
+    </main>
+  </body>
+</html>

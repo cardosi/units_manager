@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show Delivery</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/deliveries'>Delivery Dashboard</a></li>
+      </ul>
+    </nav>
+    <h1>Delivery</h1>
+    <h3>Scheduled For: <%=delivery.scheduled%>
+    <h3>Customer: <%=delivery.customer%></h3>
+    <ul>
+      <li><a href='/deliveries/<%=delivery._id%>/edit'>Edit This Delivery</a></li>
+      <li>
+        <form action='/deliveries/<%=delivery._id%>?_method=DELETE' method='POST'>
+          <input type='submit' value='Remove This Delivery'/>
+        </form>
+      </li>
+    </ul>
+
+  </body>
+</html>

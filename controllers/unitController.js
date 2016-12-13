@@ -46,6 +46,13 @@ router.put('/:id', function(req, res){
   });
 });
 
+//DELETE ROUTE/////////////////////////////////////////////
+router.delete('/:id', function(req, res){
+  Unit.findByIdAndRemove(req.params.id, function(err, foundUnit){
+    res.redirect('/units');
+  })
+})
+
 //SHOW ROUTE//////////////////////////////////////////////
 router.get('/:id', function(req, res){
   Unit.findById(req.params.id, function(err, foundUnit){

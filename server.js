@@ -25,6 +25,8 @@ app.use(methodOverride('_method'));
 //CONTROLLERS/////////////////////////////////////////
 var unitsController = require('./controllers/unitController');
 app.use('/units', unitsController);
+var deliveriesController = require('./controllers/deliveryController');
+app.use('/deliveries', deliveriesController);
 
 //ROOT ROUTE//////////////////////////////////////////
 app.get('/', function(req, res){
