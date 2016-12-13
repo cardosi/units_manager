@@ -14,7 +14,26 @@
     <h1>Add A New Customer</h1>
     <main>
       <form action="/customers/" method="POST">
-        <input type="text" name="name" value="Name"/><br/>
+        <input type="text" name="firstName" value="First Name"/><br/>
+        <input type="text" name="lastName" value="Last Name"/><br/>
+        <select name="type">
+          <option value="residential">Residential</option>
+          <option value="commercial">Commercial</option>
+        </select><br/>
+        <input type="text" name="contNeed" value="# of Containers"/><br/>
+        <select name="task">
+          <option value="On Site Storage">On Site Storage</option>
+          <option value="Warehouse Storage">Warehouse Storage</option>
+          <option value="Curb To Curb">Curb To Curb</option>
+        </select><br/>
+        <label>Date</label><br/>
+        <input type="text" name="date" value="DD-MM-YYYY"/><br/>
+        <label>Address</label><br/>
+        <input type="text" name="address" value="Street"/><br/>
+        <input type="text" name="city" value="City"/>
+        <input type="text" name="state" value="State"/>
+        <input type="text" name="zip" value="Zip Code"/><br/>
+        <input type="submit" value="Add Customer">
       </form>
     </main>
 

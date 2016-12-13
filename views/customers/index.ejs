@@ -11,17 +11,24 @@
       </ul>
     </nav>
     <h1>Customers DashBoard</h1>
-    <h2>Customers</h2>
     <section>
       <ul>
         <li><a href='/customers/new/'>Add Customer</a></li>
       </ul>
     </section>
-    <h3>All Customers</h3>
+    <h2>All Customers</h2>
     <ul>
       <% for(var i = 0; i < allCustomers.length; i++){%>
         <li>
-          <a href='/customers/<%=allCustomers[i]._id%>'><%=allCustomers[i].name%></a>
+          <h4><a href='/customers/<%=allCustomers[i]._id%>'><%=allCustomers[i].firstName%> <%=allCustomers[i].lastName%></a></h4>
+          <ul>
+            <li>Type: <%=allCustomers[i].type%></li>
+            <li>Task: <%=allCustomers[i].task%></li>
+            <li>Containers: <%=allCustomers[i].contNeed%></li>
+            <li>City: <%=allCustomers[i].city%></li>
+            <li>Delivery Date: <%=allCustomers[i].date%></li>
+            <li>Delivery Scheduled: <%=allCustomers[i].deliveryScheduled%></li>
+          </ul>
         </li>
       <%}%>
     </ul>

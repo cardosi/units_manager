@@ -12,6 +12,15 @@ router.get('/', function(req, res){
   });
 });
 
+//SEED ROUTE//////////////////////////////////////////////
+router.get('/seed', function(req, res){
+  var data = require('../seeds/units.js');
+  Unit.create(data, function(err, units){
+    if(err){console.log(err)};
+    res.redirect('/units');
+  });
+});
+
 //NEW ROUTE//////////////////////////////////////////////
 router.get('/new', function(req, res){
   Unit.find({}, function(err, allUnits){

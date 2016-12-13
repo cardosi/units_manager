@@ -31,6 +31,8 @@ var transactionsController = require('./controllers/transactionController');
 app.use('/transactions', transactionsController);
 var customersController = require('./controllers/customerController');
 app.use('/customers', customersController);
+var dashController = require('./controllers/dashController');
+app.use('/dash', dashController);
 
 //ROOT ROUTE//////////////////////////////////////////
 app.get('/', function(req, res){
