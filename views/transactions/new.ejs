@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Transaction</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/transactions'>Back to Transactions</a></li>
+        <li><a href='/'>Home</a></li>
+      </ul>
+    </nav>
+    <h1>Add A New Transaction</h1>
+    <main>
+      <form action="/transactions/" method="POST">
+        <input type="text" name="customer" value="Customer"/><br/>
+        <input type="text" name="total" value="Total"/><br/>
+        <input type="submit" value="Add Transaction"/>
+      </form>
+    </main>
+
+  </body>
+</html>

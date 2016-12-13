@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Customer</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/customers'>Customers</a></li>
+      </ul>
+    </nav>
+    <h1>Change Customer Info</h1>
+    <main>
+      <form action="/customers/<%=customer._id%>?_method=PUT" method="POST">
+        <input type="text" name="name" value='<%=customer.name%>'/><br/>
+        <input type="submit" value="Update Customer"/>
+      </form>
+    </main>
+  </body>
+</html>

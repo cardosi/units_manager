@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Customers DashBoard</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+      </ul>
+    </nav>
+    <h1>Customers DashBoard</h1>
+    <h2>Customers</h2>
+    <section>
+      <ul>
+        <li><a href='/customers/new/'>Add Customer</a></li>
+      </ul>
+    </section>
+    <h3>All Customers</h3>
+    <ul>
+      <% for(var i = 0; i < allCustomers.length; i++){%>
+        <li>
+          <a href='/customers/<%=allCustomers[i]._id%>'><%=allCustomers[i].name%></a>
+        </li>
+      <%}%>
+    </ul>
+
+  </body>
+</html>

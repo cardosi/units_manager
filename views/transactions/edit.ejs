@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Transaction</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/transactions'>Transactions</a></li>
+      </ul>
+    </nav>
+    <h1>Change Transaction Info</h1>
+    <main>
+      <form action="/transactions/<%=transaction._id%>?_method=PUT" method="POST">
+        <input type="text" name="customer" value='<%=transaction.customer%>'/><br/>
+        <input type="text" name="total" value="<%=transaction.total%>"/><br/>
+        <input type="submit" value="Update Transaction"/>
+      </form>
+    </main>
+  </body>
+</html>

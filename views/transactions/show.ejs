@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show Transaction</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/transactions'>Transaction Dashboard</a></li>
+      </ul>
+    </nav>
+    <h1>Transaction</h1>
+    <h3>Customer: <%=transaction.customer%></h3>
+    <h3>Total: <%=transaction.total%></h3>
+    <ul>
+      <li><a href='/transactions/<%=transaction._id%>/edit'>Edit This Transaction</a></li>
+      <li>
+        <form action='/transactions/<%=transaction._id%>?_method=DELETE' method='POST'>
+          <input type='submit' value='Remove This Transaction'/>
+        </form>
+      </li>
+    </ul>
+
+  </body>
+</html>

@@ -7,13 +7,13 @@ var customerSchema = new Schema({
   phone: Number,
   email: String,
   address: String,
-  containers: [],
-  deliveries: [],
-  transactions: [],
+  containers: String,
+  deliveries: String,
+  transactions: String,
   payment_method: String,
-  communications: []
+  communications: String
 });
 
 var Customer = mongoose.model('Customer', customerSchema);
 
-mondule.exports = Customer;
+module.exports = Customer;
