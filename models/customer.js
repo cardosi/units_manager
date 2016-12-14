@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var delivery = require('../models/delivery.js');
 var customerSchema = new Schema({
   firstName: String,
   lastName: String,
@@ -12,7 +13,8 @@ var customerSchema = new Schema({
   state: String,
   zip: String,
   containers: String,
-  deliveryScheduled: {type: Boolean, default: "false"},
+  deliveryToSchedule: String,
+  deliveries: [delivery.schema],
   transactions: String,
   payment_method: String,
   communications: String

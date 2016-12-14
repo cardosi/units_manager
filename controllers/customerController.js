@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Customer = require('../models/customer.js');
+var Transaction = require('../models/transaction.js');
 
 //INDEX ROUTE/////////////////////////////////////////////
 router.get('/', function(req, res){
@@ -24,8 +25,13 @@ router.get('/new', function(req, res){
 //CREATE ROUTE///////////////////////////////////////////
 router.post('/', function(req, res){
   Customer.create(req.body, function(err, createdCustomer){
-    res.redirect('/customers');
-    console.log(req.body);
+    Transaction.create({}, function(err, createdTransaction){
+      createdTransaction.customer.push(req.body);
+      createdTransaction.save(function(err, savedTransaction){
+        res.redirect('/customers');
+        console.log(req.body);
+      });
+    });
   });
 });
 

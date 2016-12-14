@@ -1,13 +1,16 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 var Delivery = require('../models/delivery.js');
+
 
 //INDEX ROUTE/////////////////////////////////////////////
 router.get('/', function(req, res){
   Delivery.find({}, function(err, foundDeliveries){
     console.log(foundDeliveries);
     res.render('deliveries/index.ejs', {
-      allDeliveries: foundDeliveries
+      allDeliveries: foundDeliveries,
+      moment: moment
     });
   });
 });
@@ -61,6 +64,5 @@ router.get('/:id', function(req, res){
     });
   });
 });
-
 
 module.exports = router;

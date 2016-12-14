@@ -22,7 +22,7 @@
     <ul>
       <% for(var i = 0; i < allTransactions.length; i++){%>
         <li>
-          <a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer%></a>
+          <a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer[0].firstName%></a>
         </li>
       <%}%>
     </ul>

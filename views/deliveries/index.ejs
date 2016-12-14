@@ -19,10 +19,11 @@
       </ul>
     </section>
     <h3>All Deliveries</h3>
+    <h3><%= moment().format('DD-MM-YYYY'); %></h3>
     <ul>
       <% for(var i = 0; i < allDeliveries.length; i++){%>
         <li>
-          <a href='/deliveries/<%=allDeliveries[i]._id%>'><%=allDeliveries[i].scheduled%></a>
+          <a href='/deliveries/<%=allDeliveries[i]._id%>'><%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%></a>
         </li>
       <%}%>
     </ul>
