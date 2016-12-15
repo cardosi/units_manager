@@ -18,6 +18,35 @@
         <li><a href='/units/new/'>Add Container</a></li>
       </ul>
     </section>
+    <%var containersOut = 0;%>
+    <%for(var i = 0; i < allUnits.length; i++){
+        if(allUnits[i].status === "Delivered"){
+          containersOut += 1;
+        }
+      }%>
+
+    <h3>Off Site Units: <%=containersOut%></h3>
+    <ul>
+      <%for(var i = 0; i < allUnits.length; i++){
+        if(allUnits[i].status === "Delivered"){%>
+          <li>
+            <h5> Customer: <%=allUnits[i].customerFirst%> </h5>
+            <ul>
+              <li><%=allUnits[i].city%></li>
+              <li>Rental Started: <%=moment(allUnits[i].deliveredOn, 'YYYYMMDD').fromNow()%></li>
+              <%if(allUnits[i].task === "On Site Storage"){%>
+                <input type="submit" value="Schedule Return Empty"/>
+              <%}else if(allUnits[i].task === "Warehouse Storage"){%>
+                <input type="submit" value="Schedule Return Full"/>
+              <%} else{%>
+                <input type="submit" value="Schedule Curb To Crub"/>
+              <%}%>
+            </ul>
+          </li>
+        <%}
+      }%>
+    </ul>
+
     <h3>All Containers</h3>
     <ul>
       <% for(var i = 0; i < allUnits.length; i++){%>

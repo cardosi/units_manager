@@ -22,7 +22,13 @@
     <ul>
       <% for(var i = 0; i < allTransactions.length; i++){%>
         <li>
-          <a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer[0].firstName%></a>
+          <h5><a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer[0].firstName%></a></h5>
+          <ul>
+            <%for(var j = 0; j < allTransactions[i].deliveries.length; j++){%>
+              <li>Delivery Price: <%=allTransactions[i].deliveries[j].price%></li>
+            <%}%>
+              <li>Total: <%allTransactions[i].total%></li>
+          </ul>
         </li>
       <%}%>
     </ul>

@@ -8,7 +8,7 @@ var transactionSchema = new Schema({
   deliveries: [delivery.schema],
   containers: String,
   other_fees: String,
-  total: String,
+  total: Number,
   payment_method: String,
   paid: String,
   due: String

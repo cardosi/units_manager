@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var Unit = require('../models/unit.js');
+var moment = require('moment');
 
 //INDEX ROUTE/////////////////////////////////////////////
 router.get('/', function(req, res){
   Unit.find({}, function(err, foundUnits){
     console.log(foundUnits);
     res.render('units/index.ejs', {
-      allUnits: foundUnits
+      allUnits: foundUnits,
+      moment: moment
     });
   });
 });

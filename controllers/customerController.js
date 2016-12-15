@@ -26,10 +26,13 @@ router.get('/new', function(req, res){
 router.post('/', function(req, res){
   Customer.create(req.body, function(err, createdCustomer){
     Transaction.create({}, function(err, createdTransaction){
-      createdTransaction.customer.push(req.body);
-      createdTransaction.save(function(err, savedTransaction){
-        res.redirect('/customers');
-        console.log(req.body);
+      createdCustomer.transaction_id = createdTransaction._id;
+      createdCustomer.save(function(err, savedCustomer){
+        createdTransaction.customer.push(req.body);
+        createdTransaction.save(function(err, savedTransaction){
+          res.redirect('/customers');
+          console.log(req.body);
+        });
       });
     });
   });

@@ -27,8 +27,13 @@
       <h3>Upcoming Deliveries</h3>
       <ul>
         <%for(var i = 0; i < allDeliveries.length; i++){
-          if(allDeliveries[i].date === moment().format('DD-MM-YYYY')){%>
-            <li><%=allDeliveries[i].firstName%></li>
+          if(allDeliveries[i].date === moment().format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+            <li>
+              <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+              <form action='/dash/completed/<%=allDeliveries[i]._id%>?_method=PUT' method="POST">
+                <input type="submit" value="Delivery Complete"/>
+              </form>
+            </li>
           <%}
         }%>
       </ul>
@@ -50,6 +55,7 @@
             <input type="text" name="city" value="<%=allCustomers[i].city%>"/>
             <input type="text" name="state" value="<%=allCustomers[i].state%>"/>
             <input type="text" name="zip" value="<%=allCustomers[i].zip%>"/><br/>
+            <input type="text" name="placed" value="Placement Of Container"/><br/>
             <select name="container">
               <%for(var i = 0; i < allUnits.length; i++){
                 if(allUnits[i].status === "empty"){%>

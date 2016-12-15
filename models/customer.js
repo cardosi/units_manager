@@ -15,6 +15,8 @@ var customerSchema = new Schema({
   containers: String,
   deliveryToSchedule: String,
   deliveries: [delivery.schema],
+  transaction_id: String,
+  price: String,
   transactions: String,
   payment_method: String,
   communications: String
