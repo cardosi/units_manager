@@ -6,9 +6,10 @@ var transactionSchema = new Schema({
   customer_id: String,
   customer: [customer.schema],
   deliveries: [delivery.schema],
+  rental_fees: [{type: String}],
   containers: String,
   other_fees: String,
-  total: Number,
+  total: {type: Number, default: 0},
   payment_method: String,
   paid: String,
   due: String

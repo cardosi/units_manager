@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Customer = require('../models/customer.js');
 var Transaction = require('../models/transaction.js');
+var Unit = require('../models/unit.js');
 
 //INDEX ROUTE/////////////////////////////////////////////
 router.get('/', function(req, res){
@@ -12,6 +13,23 @@ router.get('/', function(req, res){
     });
   });
 });
+
+//SEED ROUTE//////////////////////////////////////////////
+// router.get('/seed', function(req, res){
+//   var data = require('../seeds/customers.js');
+//   Customer.create(data, function(err, createdCustomer){
+//     Transaction.create({}, function(err, createdTransaction){
+//       createdCustomer.transaction_id = createdTransaction._id;
+//       console.log(createdCustomer);
+//       createdCustomer.save(function(err, savedCustomer){
+//         createdTransaction.customer.push(data);
+//         createdTransaction.save(function(err, savedTransaction){
+//           res.redirect('/customers');
+//         });
+//       });
+//     });
+//   });
+// });
 
 //NEW ROUTE//////////////////////////////////////////////
 router.get('/new', function(req, res){
@@ -65,8 +83,13 @@ router.delete('/:id', function(req, res){
 //SHOW ROUTE//////////////////////////////////////////////
 router.get('/:id', function(req, res){
   Customer.findById(req.params.id, function(err, foundCustomer){
-    res.render('customers/show.ejs', {
-      customer: foundCustomer
+    Unit.find(foundCustomer.containers, function(err, allUnits){
+      console.log(allUnits[0].customer_id)
+      console.log(foundCustomer._id);
+      res.render('customers/show.ejs', {
+        customer: foundCustomer,
+        units: allUnits
+      });
     });
   });
 });

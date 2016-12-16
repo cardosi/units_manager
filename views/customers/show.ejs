@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Show Customer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css">
   </head>
   <body>
     <nav>
@@ -14,13 +16,17 @@
     <h1>Customer: <%=customer.firstName%> <%=customer.lastName%></h1>
     <ul>
       <li>Type: <%=customer.type%></li>
-      <li>Needs <%=customer.contNeed%> Containers</li>
+      <li><%=customer.contNeed%> Containers</li>
       <li>Task: <%=customer.task%></li>
       <li>Address:<br/>
         <%=customer.address%><br/>
         <%=customer.city%>, <%=customer.state%> <%=customer.zip%></li>
       <li>Delivery Date: <%=customer.date%></li>
-      <li>Delivery Scheduled: <%=customer.deliveryScheduled%></li>
+      <%for(var i = 0; i < units.length; i++){%>
+        <%if(units[i].customer_id === customer._id.toString()){%>
+          <li><a href='/units/<%=units[i]._id%>'>Container: <%=units[i].contNum%></a></li>
+        <%}%>
+      <%}%>
     </ul>
     <ul>
       <li><a href='/customers/<%=customer._id%>/edit'>Edit This Customer</a></li>

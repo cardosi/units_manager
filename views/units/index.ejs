@@ -2,16 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>UNITS DashBoard</title>
+    <title>Containers DashBoard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
   </head>
   <body>
-
     <nav>
-      <ul>
-        <li><a href='/'>Home</a></li>
+      <ul class="nav nav-pills">
+        <li role="presentation"><a href='/'>Dashboard</a></li>
+        <li role="presentation"><a href='/customers'>Customers</a></li>
+        <li role="presentation" class="active"><a href='/units'>UNITS</a></li>
+        <li role="presentation"><a href='/deliveries'>Deliveries</a></li>
+        <li role="presentation"><a href='/transactions'>Transactions</a></li>
       </ul>
     </nav>
-    <h1>UNITS DashBoard</h1>
+    <h1>Container DashBoard</h1>
     <h2>Containers</h2>
     <section>
       <ul>
@@ -19,32 +24,114 @@
       </ul>
     </section>
     <%var containersOut = 0;%>
-    <%for(var i = 0; i < allUnits.length; i++){
-        if(allUnits[i].status === "Delivered"){
-          containersOut += 1;
-        }
-      }%>
+    <%for(var i = 0; i < allUnits.length; i++){%>
+        <%if(allUnits[i].address !== "150 S. Dobson Rd"){%>
+          <%containersOut += 1;%>
+        <%}%>
+      <%}%>
 
-    <h3>Off Site Units: <%=containersOut%></h3>
+    <h3>Off Site Containers: <%=containersOut%></h3>
     <ul>
-      <%for(var i = 0; i < allUnits.length; i++){
-        if(allUnits[i].status === "Delivered"){%>
+      <%for(var i = 0; i < allUnits.length; i++){%>
+        <%if(allUnits[i].deliveries.length > 0 && allUnits[i].deliveryScheduled === false){%>
           <li>
             <h5> Customer: <%=allUnits[i].customerFirst%> </h5>
             <ul>
               <li><%=allUnits[i].city%></li>
               <li>Rental Started: <%=moment(allUnits[i].deliveredOn, 'YYYYMMDD').fromNow()%></li>
-              <%if(allUnits[i].task === "On Site Storage"){%>
-                <input type="submit" value="Schedule Return Empty"/>
-              <%}else if(allUnits[i].task === "Warehouse Storage"){%>
-                <input type="submit" value="Schedule Return Full"/>
-              <%} else{%>
-                <input type="submit" value="Schedule Curb To Crub"/>
+              <%if((allUnits[i].task === "On Site Storage" && allUnits[i].deliveries.length === 1) || (allUnits[i].task === "Warehouse Storage" && allUnits[i].deliveries.length === 3) || (allUnits[i].task === "Curb To Curb" && allUnits[i].deliveries.length === 2)){%>
+                <form action='/units/deliveryRE' method='POST'>
+                  <input type="text" name="customer_id" value="<%=allUnits[i].customer_id%>"/><br/>
+                  <input type="text" name="transaction_id" value="<%=allUnits[i].transaction_id%>"/><br/>
+                  <input type="text" name="firstName" value="<%=allUnits[i].customerFirst%>"/>
+                  <input type="text" name="lastName" value="<%=allUnits[i].customerLast%>"/><br/>
+                  <input type="text" name="address" value="150 S. Dobson Rd"/><br/>
+                  <input type="text" name="city" value="Mesa"/>
+                  <input type="text" name="state" value="AZ"/>
+                  <input type="text" name="zip" value="85202"/><br/>
+                  <input type="text" name="address_origin" value="<%=allUnits[i].address%>"/><br/>
+                  <input type="text" name="city_origin" value="<%=allUnits[i].city%>"/>
+                  <input type="text" name="state_origin" value="<%=allUnits[i].state%>"/>
+                  <input type="text" name="zip_origin" value="<%=allUnits[i].zip%>"/><br/>
+                  <input type="text" name="placed" value="outside"/><br/>
+                  <input type="text" name="container" value="<%=allUnits[i]._id%>"/><br/>
+                  <input type="text" name="containerStatus" value="empty"/><br/>
+                  <input type="text" name="price" value="50"/><br/>
+                  <input type="text" name="date" value="Date"/><br/>
+                  <input type="text" name="type" value="Return Empty"/><br/>
+                  <input type="submit" value="Schedule Return Empty"/>
+                </form>
+              <%}else if(allUnits[i].task === "Warehouse Storage" && allUnits[i].deliveries.length === 1){%>
+                <form action='/units/deliveryRF' method='POST'>
+                  <input type="text" name="customer_id" value="<%=allUnits[i].customer_id%>"/><br/>
+                  <input type="text" name="transaction_id" value="<%=allUnits[i].transaction_id%>"/><br/>
+                  <input type="text" name="firstName" value="<%=allUnits[i].customerFirst%>"/>
+                  <input type="text" name="lastName" value="<%=allUnits[i].customerLast%>"/><br/>
+                  <input type="text" name="address" value="150 S. Dobson Rd"/><br/>
+                  <input type="text" name="city" value="Mesa"/>
+                  <input type="text" name="state" value="AZ"/>
+                  <input type="text" name="zip" value="85202"/><br/>
+                  <input type="text" name="address_origin" value="<%=allUnits[i].address%>"/><br/>
+                  <input type="text" name="city_origin" value="<%=allUnits[i].city%>"/>
+                  <input type="text" name="state_origin" value="<%=allUnits[i].state%>"/>
+                  <input type="text" name="zip_origin" value="<%=allUnits[i].zip%>"/><br/>
+                  <input type="text" name="placed" value="inside"/><br/>
+                  <input type="text" name="container" value="<%=allUnits[i]._id%>"/><br/>
+                  <input type="text" name="containerStatus" value="full"/><br/>
+                  <input type="text" name="price" value="50"/><br/>
+                  <input type="text" name="date" value="Date"/><br/>
+                  <input type="text" name="type" value="Return Full"/><br/>
+                  <input type="submit" value="Schedule Return Full"/>
+                </form>
+              <%}else if(allUnits[i].task === "Warehouse Storage" && allUnits[i].deliveries.length === 2){%>
+                <form action='/units/deliveryDF' method='POST'>
+                  <input type="text" name="customer_id" value="<%=allUnits[i].customer_id%>"/><br/>
+                  <input type="text" name="transaction_id" value="<%=allUnits[i].transaction_id%>"/><br/>
+                  <input type="text" name="firstName" value="<%=allUnits[i].customerFirst%>"/>
+                  <input type="text" name="lastName" value="<%=allUnits[i].customerLast%>"/><br/>
+                  <input type="text" name="address_origin" value="150 S. Dobson Rd"/><br/>
+                  <input type="text" name="city_origin" value="Mesa"/>
+                  <input type="text" name="state_origin" value="AZ"/>
+                  <input type="text" name="zip_origin" value="85202"/><br/>
+                  <input type="text" name="address" value="<%=allUnits[i].address%>"/><br/>
+                  <input type="text" name="city" value="<%=allUnits[i].city%>"/>
+                  <input type="text" name="state" value="<%=allUnits[i].state%>"/>
+                  <input type="text" name="zip" value="<%=allUnits[i].zip%>"/><br/>
+                  <input type="text" name="placed" value="inside"/><br/>
+                  <input type="text" name="container" value="<%=allUnits[i]._id%>"/><br/>
+                  <input type="text" name="containerStatus" value="empty"/><br/>
+                  <input type="text" name="price" value="50"/><br/>
+                  <input type="text" name="date" value="Date"/><br/>
+                  <input type="text" name="type" value="Deliver Full"/><br/>
+                  <input type="submit" value="Schedule Deliver Full"/>
+                </form>
+              <%} else if(allUnits[i].task === "Curb To Curb" && allUnits[i].deliveries.length === 1){%>
+                <form action='/units/deliveryCTC' method='POST'>
+                  <input type="text" name="customer_id" value="<%=allUnits[i].customer_id%>"/><br/>
+                  <input type="text" name="transaction_id" value="<%=allUnits[i].transaction_id%>"/><br/>
+                  <input type="text" name="firstName" value="<%=allUnits[i].customerFirst%>"/>
+                  <input type="text" name="lastName" value="<%=allUnits[i].customerLast%>"/><br/>
+                  <input type="text" name="address" value="Move To:...Address"/><br/>
+                  <input type="text" name="city" value="Move To:...City"/>
+                  <input type="text" name="state" value="Move To:...State"/>
+                  <input type="text" name="zip" value="Move To:...Zip"/><br/>
+                  <input type="text" name="address_origin" value="<%=allUnits[i].address%>"/><br/>
+                  <input type="text" name="city_origin" value="<%=allUnits[i].city%>"/>
+                  <input type="text" name="state_origin" value="<%=allUnits[i].state%>"/>
+                  <input type="text" name="zip_origin" value="<%=allUnits[i].zip%>"/><br/>
+                  <input type="text" name="placed" value="Place Container:...Area"/><br/>
+                  <input type="text" name="container" value="<%=allUnits[i]._id%>"/><br/>
+                  <input type="text" name="containerStatus" value="full"/><br/>
+                  <input type="text" name="price" value="50"/><br/>
+                  <input type="text" name="date" value="Date"/><br/>
+                  <input type="text" name="type" value="Curb To Curb"/><br/>
+                  <input type="submit" value="Schedule Curb To Curb Move"/>
+                </form>
               <%}%>
             </ul>
           </li>
-        <%}
-      }%>
+        <%}%>
+      <%}%>
     </ul>
 
     <h3>All Containers</h3>

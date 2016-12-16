@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var moment = require('moment');
+var ejsLint = require('ejs-lint');
 var app = express();
+
 
 //PORT////////////////////////////////////////////////
 var port = process.env.PORT || 3000;
@@ -22,6 +24,8 @@ db.once('open', function(){
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
+
 
 
 //CONTROLLERS/////////////////////////////////////////
@@ -38,7 +42,7 @@ app.use('/dash', dashController);
 
 //ROOT ROUTE//////////////////////////////////////////
 app.get('/', function(req, res){
-  res.render('index.ejs');
+  res.redirect('/dash');
 });
 
 //LISTENER/////////////////////////////////////////////

@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var unitSchema = new Schema({
   contNum: Number,
+  empty: {type: Boolean, default: true},
+  deliveries: [{type: String}],
   brand: String,
   status: String,
   address: String,
@@ -12,8 +14,11 @@ var unitSchema = new Schema({
   deliveredOn: String,
   customerFirst: String,
   customerLast: String,
+  customer_id: String,
+  transaction_id: String,
   price: String,
   task: String,
+  deliveryScheduled: {type: Boolean, default: false},
   debt: Number,
   monthly_cost: Number,
   current_monthly_revenue: Number,

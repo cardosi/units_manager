@@ -3,12 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>Transactions DashBoard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
   </head>
   <body>
 
     <nav>
-      <ul>
-        <li><a href='/'>Home</a></li>
+      <ul class="nav nav-pills">
+        <li role="presentation"><a href='/'>Dashboard</a></li>
+        <li role="presentation"><a href='/customers'>Customers</a></li>
+        <li role="presentation"><a href='/units'>UNITS</a></li>
+        <li role="presentation"><a href='/deliveries'>Deliveries</a></li>
+        <li role="presentation" class="active"><a href='/transactions'>Transactions</a></li>
       </ul>
     </nav>
     <h1>Transactions DashBoard</h1>
@@ -22,12 +28,12 @@
     <ul>
       <% for(var i = 0; i < allTransactions.length; i++){%>
         <li>
-          <h5><a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer[0].firstName%></a></h5>
+          <h5><a href='/transactions/<%=allTransactions[i]._id%>'><%=allTransactions[i].customer[0].firstName%> <%=allTransactions[i].customer[0].lastName%></a></h5>
           <ul>
             <%for(var j = 0; j < allTransactions[i].deliveries.length; j++){%>
-              <li>Delivery Price: <%=allTransactions[i].deliveries[j].price%></li>
+              <li>Delivery - <%=allTransactions[i].deliveries[j].type%>: $<%=allTransactions[i].deliveries[j].price%></li>
             <%}%>
-              <li>Total: <%allTransactions[i].total%></li>
+              <li>Total: $<%=allTransactions[i].total%></li>
           </ul>
         </li>
       <%}%>

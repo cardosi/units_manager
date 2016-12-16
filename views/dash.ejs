@@ -2,76 +2,165 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Dashboard</title>
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
   </head>
   <body>
     <nav>
-      <ul>
-        <li><a href='/units'>UNITS</a></li>
-        <li><a href='/deliveries'>Deliveries</a></li>
-        <li><a href='/transactions'>Transactions</a></li>
-        <li><a href='/customers'>Customers</a></li>
+      <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href='/'>Dashboard</a></li>
+        <li role="presentation"><a href='/customers'>Customers</a></li>
+        <li role="presentation"><a href='/units'>UNITS</a></li>
+        <li role="presentation"><a href='/deliveries'>Deliveries</a></li>
+        <li role="presentation"><a href='/transactions'>Transactions</a></li>
       </ul>
     </nav>
     <h1>UNITS Manager Dashboard</h1>
-    <%var empties = 0;
-      for(var i = 0; i < allUnits.length; i++){
-      if(allUnits[i].status === "empty"){
-        empties = empties + 1
-      }
-    }%>
+    <%var empties = 0;%>
+      <%for(var i = 0; i < allUnits.length; i++){%>
+      <%if(allUnits[i].status === "empty"){%>
+        <%empties = empties + 1%>
+      <%}%>
+    <%}%>
 
     <main>
       <p>Empty Containers: <%= empties %></p>
-
       <h3>Upcoming Deliveries</h3>
+      <h4>Today - <%=moment().format('dddd MMM Do')%></h4>
       <ul>
-        <%for(var i = 0; i < allDeliveries.length; i++){
-          if(allDeliveries[i].date === moment().format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+        <%for(var i = 0; i < allDeliveries.length; i++){%>
+          <%if(allDeliveries[i].date === moment().format('DD-MM-YYYY') && allDeliveries[i].completed === false && allDeliveries[i].type !== "Return Empty"){%>
             <li>
+              <%=allDeliveries[i].type%><br/>
               <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
               <form action='/dash/completed/<%=allDeliveries[i]._id%>?_method=PUT' method="POST">
                 <input type="submit" value="Delivery Complete"/>
               </form>
             </li>
-          <%}
-        }%>
-      </ul>
 
-      <h3>Deliveries to be scheduled</h3>
+        <%}%>
+        <%if(allDeliveries[i].date === moment().format('DD-MM-YYYY') && allDeliveries[i].completed === false && allDeliveries[i].type === "Return Empty"){%>
+          <li>
+            <%=allDeliveries[i].type%><br/>
+            <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+            <form action='/dash/ended/<%=allDeliveries[i]._id%>?_method=PUT' method="POST">
+              <input type="submit" value="Delivery Complete"/>
+            </form>
+          </li>
+        <%}%>
+      <%}%>
+      </ul>
+      <h4>Tomorrow - <%=moment().add(1, 'days').format('dddd MMM Do')%></h4>
       <ul>
-        <%for(var i = 0; i < allCustomers.length; i++){
-        if(allCustomers[i].deliveryToSchedule > 0){%>
+        <%for(var i = 0; i < allDeliveries.length; i++){%>
+          <%if(allDeliveries[i].date === moment().add(1, 'days').format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+            <li>
+              <%=allDeliveries[i].type%><br/>
+              <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+            </li>
+          <%}%>
+        <%}%>
+      </ul>
+      <h4><%=moment().add(2, 'days').format('dddd MMM Do')%></h4>
+      <ul>
+        <%for(var i = 0; i < allDeliveries.length; i++){%>
+          <%if(allDeliveries[i].date === moment().add(2, 'days').format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+            <li>
+              <%=allDeliveries[i].type%><br/>
+              <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+            </li>
+          <%}%>
+        <%}%>
+      </ul>
+      <h4><%=moment().add(3, 'days').format('dddd MMM Do')%></h4>
+      <ul>
+        <%for(var i = 0; i < allDeliveries.length; i++){%>
+          <%if(allDeliveries[i].date === moment().add(3, 'days').format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+            <li>
+              <%=allDeliveries[i].type%><br/>
+              <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+            </li>
+          <%}%>
+        <%}%>
+      </ul>
+      <h4><%=moment().add(4, 'days').format('dddd MMM Do')%></h4>
+      <ul>
+        <%for(var i = 0; i < allDeliveries.length; i++){%>
+          <%if(allDeliveries[i].date === moment().add(4, 'days').format('DD-MM-YYYY') && allDeliveries[i].completed === false){%>
+            <li>
+              <%=allDeliveries[i].type%><br/>
+              <%=allDeliveries[i].firstName%> <%=allDeliveries[i].lastName%> - <%=allDeliveries[i].city%><br/>
+            </li>
+          <%}%>
+        <%}%>
+      </ul>
+      <h3>New Customer Delivery Scheduling:</h3>
+      <ul>
+        <%for(var i = 0; i < allCustomers.length; i++){%>
+        <%if(allCustomers[i].deliveryToSchedule > 0){%>
         <li>
           <h5><a href=''><%=allCustomers[i].firstName%> <%=allCustomers[i].lastName%>: <%=allCustomers[i].deliveryToSchedule%></a></h5>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+          Schedule Delivery
+          </button>
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Schedule Delivery For <%=allCustomers[i].firstName%> <%=allCustomers[i].lastName%></h4>
+          </div>
+          <div class="modal-body">
           <form action='/dash/add' method='POST'>
-            <input type="text" name="customer_id" value="<%=allCustomers[i]._id%>"/><br/>
-            <input type="text" name="firstName" value="<%=allCustomers[i].firstName%>"/>
-            <input type="text" name="lastName" value="<%=allCustomers[i].lastName%>"/><br/>
+            <input type="hidden" name="customer_id" value="<%=allCustomers[i]._id%>"/>
+            <input type="hidden" name="firstName" value="<%=allCustomers[i].firstName%>"/>
+            <input type="hidden" name="lastName" value="<%=allCustomers[i].lastName%>"/>
             <label>Delivery Date</label><br/>
             <input type="text" name="date" value="<%=allCustomers[i].date%>"/><br/>
-            <label>Address</label>
+            <label>Address</label><br/>
             <input type="text" name="address" value="<%=allCustomers[i].address%>"/><br/>
             <input type="text" name="city" value="<%=allCustomers[i].city%>"/>
             <input type="text" name="state" value="<%=allCustomers[i].state%>"/>
             <input type="text" name="zip" value="<%=allCustomers[i].zip%>"/><br/>
-            <input type="text" name="placed" value="Placement Of Container"/><br/>
+            <input type="hidden" name="address_origin" value="150 S. Dobson Rd"/>
+            <input type="hidden" name="city_origin" value="Mesa"/>
+            <input type="hidden" name="state_origin" value="AZ"/>
+            <input type="hidden" name="zip_origin" value="85202"/>
+            <label>Placement of Container</label><br/>
+            <input type="text" name="placed" value="Ex: Driveway/Street"/><br/>
+            <input type="hidden" name="type" value="Deliver Empty"/>
+            <label>Choose Container</label><br/>
             <select name="container">
-              <%for(var i = 0; i < allUnits.length; i++){
-                if(allUnits[i].status === "empty"){%>
+              <%for(var i = 0; i < allUnits.length; i++){%>
+                <%if(allUnits[i].status === "empty"){%>
                   <option value="<%=allUnits[i]._id%>"><%=allUnits[i].contNum%></option>
-                <%}
-              }%>
+                <%}%>
+              <%}%>
             </select><br/>
-            <input type="text" name="containerStatus" value="empty"/><br/>
-            <input type="text" name="price" value="$price"/><br/>
+            <input type="hidden" name="containerStatus" value="empty"/>
+            <label>Price</label><br/>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input class="form-control" type="text" name="price" value="50"/><br/>
+            </div>
             <input type="submit" value="Schedule Delivery"/>
           </form>
+          </div>
+          </div>
+          </div>
+          </div>
         </li>
-          <%}
-        }%>
+          <%}%>
+        <%}%>
       </ul>
     </main>
+    <a href="/units/seed">Container Seeds</a><br/>
 
   </body>
 </html>

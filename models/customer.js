@@ -12,11 +12,11 @@ var customerSchema = new Schema({
   city: String,
   state: String,
   zip: String,
-  containers: String,
+  containers: [{type: String}],
   deliveryToSchedule: String,
   deliveries: [delivery.schema],
   transaction_id: String,
-  price: String,
+  price: Number,
   transactions: String,
   payment_method: String,
   communications: String
